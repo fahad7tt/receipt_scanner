@@ -1,9 +1,26 @@
-class ReceiptModel {
+import 'package:hive/hive.dart';
+
+part 'receipt_model.g.dart';
+
+@HiveType(typeId: 0)
+class ReceiptModel extends HiveObject {
+
+  @HiveField(0)
   String id;
+
+  @HiveField(1)
   String imagePath;
+
+  @HiveField(2)
   double amount;
+
+  @HiveField(3)
   DateTime date;
+
+  @HiveField(4)
   String category;
+
+  @HiveField(5)
   String notes;
 
   ReceiptModel({
@@ -14,26 +31,4 @@ class ReceiptModel {
     required this.category,
     required this.notes,
   });
-
-  Map<String, dynamic> toMap() {
-    return {
-      'id': id,
-      'imagePath': imagePath,
-      'amount': amount,
-      'date': date.toIso8601String(),
-      'category': category,
-      'notes': notes,
-    };
-  }
-
-  factory ReceiptModel.fromMap(Map<String, dynamic> map) {
-    return ReceiptModel(
-      id: map['id'],
-      imagePath: map['imagePath'],
-      amount: map['amount'],
-      date: DateTime.parse(map['date']),
-      category: map['category'],
-      notes: map['notes'],
-    );
-  }
 }
